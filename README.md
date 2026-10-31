@@ -30,7 +30,7 @@ An end-to-end Power BI project on the Olist Brazilian e-commerce dataset (about 
 ### 4. Products and Pricing
 ![Products and Pricing](04_products_pricing.png)
 
-A PDF export of the full report is included: `Olist_Dashboard.pdf`.
+A PDF export of the full report is included: `Olist_Analysis.pdf`.
 
 ## Data model
 
