@@ -148,6 +148,16 @@ SWITCH(
     "Premium"
 )
 ```
+
+### `fact_order_items[price_band_order]`
+```dax
+SWITCH(
+         TRUE(),
+         fact_order_items[price] < 50, 1,
+         fact_order_items[price] < 150, 2,
+         fact_order_items[price] <= 500, 3,
+         4
+     )
 Boundaries: under R$ 50 is Low, R$ 50 up to 150 is Medium, R$ 150 up to and including R$ 500 is High, and above R$ 500 is Premium.
 
 ---
@@ -387,11 +397,11 @@ DIVIDE([Total Sales], CALCULATE([Total Sales], ALLSELECTED()))
 #### Category Sales Rank
 Rank of each product category by total sales within the current selection. 1 is the best-selling category and ties share a rank. Format: `0`
 ```dax
-IF(
-    ISBLANK([Total Sales]),
-    BLANK(),
-    RANKX(ALLSELECTED(dim_products[product_category]), [Total Sales], , DESC, DENSE)
-)
+     IF(
+         ISBLANK([Total Sales]) || NOT HASONEVALUE(dim_products[product_category]),
+         BLANK(),
+         RANKX(ALLSELECTED(dim_products[product_category]), [Total Sales], , DESC, DENSE)
+     )
 ```
 
 #### Top 10 Sellers Sales
